@@ -1,0 +1,14 @@
+@import '../../../styles/settings.scss';
+
+.navlink {
+  color: $color-light;
+  font-size: medium;
+  margin: 0 1em;
+  &:hover {
+    color: $color-medium;
+  }
+}
+.logo, .logo:hover {
+  color: $color-medium;
+  
+}
