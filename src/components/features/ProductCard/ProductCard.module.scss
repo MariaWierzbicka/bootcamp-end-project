@@ -1,0 +1,10 @@
+@import '../../../styles/settings.scss';
+
+.cardBody {
+  color: $color-dark;
+}
+.cardImg {
+  height: 200px;
+  padding: 5px;
+  object-fit: cover;
+}

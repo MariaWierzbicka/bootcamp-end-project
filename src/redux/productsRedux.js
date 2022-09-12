@@ -2,6 +2,7 @@ import axios from 'axios';
 import { API_URL } from '../config';
 
 export const getProducts = ({ products }) => products.data;
+export const getProductById = ({ products }, id) => products.data.find(product => product._id === id);
 export const getRequest = ({ products }) => products.request;
 
 const reducerName = 'products';

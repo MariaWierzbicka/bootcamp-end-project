@@ -1,4 +1,4 @@
-import { Container, Spinner, Alert } from 'react-bootstrap';
+import { Alert, Row } from 'react-bootstrap';
 import { useSelector, useDispatch} from 'react-redux';
 import { getProducts, loadProductsRequest, getRequest} from '../../../redux/productsRedux';
 import { useEffect } from 'react';
@@ -17,9 +17,9 @@ const Products = () => {
   else if(request.error) return <Alert color="warning">{request.error}</Alert>;
   else if(!request.success || !products.length) return <Alert color="info">No products</Alert>;
   else if(request.success) return (
-    <div>
-      {products.map(product =>  <ProductCard key={product._id} id={product._id}/>)}
-    </div>
+    <Row className="justify-content-between g-4" xs={1} sm={2} md={3} lg={4}>
+      {products.map(product =>  <ProductCard key={product._id} product={product}/>)}
+    </Row>
   )
 };
 
