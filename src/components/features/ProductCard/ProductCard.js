@@ -1,18 +1,19 @@
-import { Card, Col, Button } from 'react-bootstrap';
+import { Card, Col, Button, Row} from 'react-bootstrap';
 import styles from './ProductCard.module.scss';
 const ProductCard = ({product}) => {
-  
+  const { name, minPrice, photo, _id } = product;
   return(
     <Col>
-      <Card>
-        <Card.Img src={product.photo} className={styles.cardImg} />
-        <Card.Body className={styles.cardBody}>
-          <Card.Title>{product.name}</Card.Title>
+      <Card className={styles.cardBody}>
+        <Card.Img src={photo} className={styles.cardImg} />
+        <Card.Body>
+          <Card.Title>{name}</Card.Title>
           <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
+            Price from: ${minPrice}
           </Card.Text>
-          <Button variant="primary" href={`/products/${product._id}`}>Details</Button>
+          <Row xs={2} className="justify-content-center">
+            <Button className={styles.cardBtn} href={`/products/${_id}`}>Details</Button>
+          </Row>
         </Card.Body>
       </Card>
     </Col>

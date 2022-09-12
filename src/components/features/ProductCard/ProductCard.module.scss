@@ -1,10 +1,16 @@
 @import '../../../styles/settings.scss';
 
 .cardBody {
-  color: $color-dark;
+  color: $color-light;
+  background: linear-gradient($color-medium, $color-dark 80%);
+  border: none;
 }
 .cardImg {
   height: 200px;
   padding: 5px;
   object-fit: cover;
+}
+.cardBtn {
+  background-color: $color-medium;
+  border-color: $color-medium;
 }

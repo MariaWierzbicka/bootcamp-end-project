@@ -1,0 +1,17 @@
+@import '../../../styles/settings.scss';
+
+.dropdown {
+  background-color: $color-dark;
+  color: $color-light;
+  margin: 20px auto;
+  border-color: $color-lighter;
+}
+
+.photo {
+  object-fit: cover;
+  max-width: 100%;
+}
+
+.cartBtn {
+  width: 100%;
+}
