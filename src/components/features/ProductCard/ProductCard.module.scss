@@ -2,7 +2,7 @@
 
 .cardBody {
   color: $color-light;
-  background: linear-gradient($color-medium, $color-dark 80%);
+  background: $color-lighter;
   border: none;
 }
 .cardImg {
