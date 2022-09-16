@@ -5,6 +5,7 @@ import { faMinus } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProductById, getRequest, loadProductsRequest} from '../../../redux/productsRedux';
+import { addCartProduct} from '../../../redux/cartRedux';
 import { useState, useEffect } from 'react';
 import styles from './ProductPage.module.scss';
 import shortid from 'shortid';
@@ -21,39 +22,49 @@ const ProductPage = () => {
 
   const [fullPrice, setFullPrice] = useState('');
   const [amount, setAmount] = useState(1);
-  const [cartItem, setCartItem] = useState({
-    amount: 1,
+  const [cartProduct, setCartProduct] = useState({
+    name: '',
+    quantity: amount,
     id: id,
     basePrice: '',
     optionPrice: '',
     optionName: '',
   });
 
-  const updateAmount = ({ target }) => {
-    setCartItem({ ...cartItem, amount: target.value });
-
-  }
+  const updateAmount = ( value ) => {
+    let newAmount = amount;
+    if(value === '+') {
+      newAmount = amount + 1;
+    } else if(value === '-') {
+      newAmount = amount - 1;
+    }
+      setAmount(newAmount);
+      setCartProduct({...cartProduct, quantity: newAmount});
+  };
   const updatePrice = ({target}) => {
-    setCartItem({ ...cartItem, basePrice: product.minPrice, optionPrice: target.value, optionName: target.selectedOptions[0].text });
+    setCartProduct({ ...cartProduct, basePrice: product.minPrice, optionPrice: target.value, optionName: target.selectedOptions[0].text });
     setFullPrice(parseInt(product.minPrice) + parseInt(target.value));
-  }
+  };
 
-  const addToCart = e => {
-    e.preventDefault();
-    setCartItem({
+  if(request.success && !cartProduct.optionName ) {
+    setCartProduct({...cartProduct,
       name: product.name,
-      id: id,
-      basePrice: cartItem.basePrice,
-      optionName: cartItem.optionName,
-      amount: amount,
+      optionName: product.options[0].name,
+      optionPrice: product.options[0].addedPrice,
+      basePrice: product.minPrice
     })
-    console.log(cartItem);
+  };
+
+  const addToCart = (e) => {
+    e.preventDefault();
+    dispatch(addCartProduct(cartProduct));
   }
 
   if(request.pending) return <h2>Loading...</h2>; 
   else if(request.error) return <Alert color="warning">{request.error}</Alert>;
   else if(!request.success || !product) return <Alert color="info">No product</Alert>;
-  else if(request.success) return (
+  else if(request.success)   
+  return (
     <Container>
       <Row className="justify-content-around" >
         <Col sm={6} xs={10} >
@@ -63,22 +74,22 @@ const ProductPage = () => {
         <Col sm={4} xs={9} className="mx-4 mt-2">
           <h5>Choose type of wood</h5>
           <Form.Select onChange={updatePrice} className={styles.dropdown} required>
-            {product.options.map(item => 
-              <option key={item.name} value={item.addedPrice}>{item.name}</option>
+            {product.options.map(product =>
+              <option key={product.name} value={product.addedPrice}>{product.name}</option>
             )}
           </Form.Select>
           <Row className="justify-content-center">
             <Col xs={8}>
               <InputGroup className="my-3">
-                <Button variant="outline-secondary" id="less" onClick={() => (amount > 1 ? setAmount(amount-1) : setAmount(amount))}>
+                <Button variant="outline-secondary" onClick={() => (amount > 1 ? updateAmount('-') : null)}>
                   <FontAwesomeIcon icon={faMinus} className={styles.icon} />
                 </Button>
                 <Form.Control
-                  value={amount}
-                  onChange={updateAmount}
+                  readOnly
+                  value={amount} 
                   className="text-center"
                 />
-                <Button variant="outline-secondary" id="more" align="end" onClick={() => setAmount(amount+1)}>
+                <Button variant="outline-secondary" align="end" onClick={() => updateAmount('+')}>
                   <FontAwesomeIcon icon={faPlus} className={styles.icon} />
                 </Button>
               </InputGroup>
