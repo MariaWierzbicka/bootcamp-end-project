@@ -13,6 +13,7 @@ const ERROR_REQUEST = createActionName('ERROR_REQUEST');
 
 const LOAD_CART = createActionName('LOAD_CART');
 const ADD_CART_PRODUCT = createActionName('ADD_CART_PRODUCT');
+const UPDATE_CART_PRODUCT = createActionName('UPDATE_CART_PRODUCT');
 
 // export const startRequest = () => ({ type: START_REQUEST });
 // export const endRequest = () => ({ type: END_REQUEST });
@@ -20,6 +21,7 @@ const ADD_CART_PRODUCT = createActionName('ADD_CART_PRODUCT');
 
 export const loadCart = payload => ({ payload, type: LOAD_CART });
 export const addCartProduct = payload => ({ payload, type: ADD_CART_PRODUCT });
+export const updateCartProduct = payload => ({ payload, type: UPDATE_CART_PRODUCT });
 
 const initialState = {
   data: [],
@@ -35,7 +37,10 @@ export const reducer = (statePart = initialState, action = {}) => {
     case LOAD_CART: 
       return { ...statePart, data: [...action.payload] };
     case ADD_CART_PRODUCT: 
-      return { ...statePart, data: [...statePart.data, action.payload] }
+      return { ...statePart, data: [...statePart.data, action.payload] };
+    case UPDATE_CART_PRODUCT: 
+      return { ...statePart, data: [...statePart.data.map(product => (
+        (product._id === action.payload._id && product.optionName === action.payload.optionName) ? action.payload : product))] };
     case START_REQUEST:
       return { ...statePart, request: { pending: true, error: null, success: false } };
     case END_REQUEST:

@@ -5,7 +5,7 @@ import { faMinus } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProductById, getRequest, loadProductsRequest} from '../../../redux/productsRedux';
-import { addCartProduct} from '../../../redux/cartRedux';
+import { addCartProduct, getCart, updateCartProduct} from '../../../redux/cartRedux';
 import { useState, useEffect } from 'react';
 import styles from './ProductPage.module.scss';
 import shortid from 'shortid';
@@ -13,6 +13,8 @@ import shortid from 'shortid';
 const ProductPage = () => {
   const {id} = useParams();
   const product = useSelector(state => getProductById(state, id));
+  const cartProducts = useSelector(state => getCart(state));
+  console.log(cartProducts);
   const request = useSelector(getRequest);
   const dispatch = useDispatch();
   
@@ -29,6 +31,7 @@ const ProductPage = () => {
     basePrice: '',
     optionPrice: '',
     optionName: '',
+    cartId: shortid()
   });
 
   const updateAmount = ( value ) => {
@@ -57,7 +60,34 @@ const ProductPage = () => {
 
   const addToCart = (e) => {
     e.preventDefault();
-    dispatch(addCartProduct(cartProduct));
+
+    const inCart = cartProducts.find(item => item._id === cartProduct._id && item.optionName === cartProduct.optionName);
+    
+    if(inCart){
+      const newQuantity = inCart.quantity + cartProduct.quantity;
+      const newProduct = {...inCart, quantity: newQuantity};
+      dispatch(updateCartProduct(newProduct));
+      setCartProduct({
+        name: '',
+        quantity: amount,
+        id: id,
+        basePrice: '',
+        optionPrice: '',
+        optionName: '',
+        cartId: shortid()
+      });
+    } else {
+      dispatch(addCartProduct(cartProduct));
+      setCartProduct({
+        name: '',
+        quantity: amount,
+        id: id,
+        basePrice: '',
+        optionPrice: '',
+        optionName: '',
+        cartId: shortid()
+      });
+    }
   }
 
   if(request.pending) return <h2>Loading...</h2>; 
@@ -74,8 +104,8 @@ const ProductPage = () => {
         <Col sm={4} xs={9} className="mx-4 mt-2">
           <h5>Choose type of wood</h5>
           <Form.Select onChange={updatePrice} className={styles.dropdown} required>
-            {product.options.map(product =>
-              <option key={product.name} value={product.addedPrice}>{product.name}</option>
+            {product.options.map(option =>
+              <option key={option.name} value={option.addedPrice}>{option.name}</option>
             )}
           </Form.Select>
           <Row className="justify-content-center">

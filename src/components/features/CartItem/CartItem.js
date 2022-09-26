@@ -11,7 +11,8 @@ import styles from './CartItem.module.scss';
 const CartItem = ({product}) => {
 
   const cartProducts = useSelector(state => getCart(state));
-  console.log(cartProducts);
+  // console.log(cartProducts);
+  // const thisProduct = cartProducts.find(cartProduct =>  )
 
   const [amount, setAmount] = useState(product.quantity);
   const updateAmount = ( value ) => {
