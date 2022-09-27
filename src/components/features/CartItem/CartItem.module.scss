@@ -3,7 +3,19 @@
 .amtInput {
   text-align: center;
   border-radius: 0;
+  padding: 0;
+  min-width: 20px;
 }
 .cartContainer {
   border-bottom: solid $color-lighter 0.5px;
+  justify-content: center;
+}
+
+.removeBtn {
+  color: $color-medium;
+  border: solid $color-medium 0.5px;
+}
+
+.input {
+  background-color: $color-dark;
 }

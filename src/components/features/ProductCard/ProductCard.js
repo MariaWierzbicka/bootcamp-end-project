@@ -1,5 +1,7 @@
 import { Card, Col, Button, Row} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 import styles from './ProductCard.module.scss';
+
 const ProductCard = ({product}) => {
   const { name, minPrice, photo, _id } = product;
   return(
@@ -12,7 +14,7 @@ const ProductCard = ({product}) => {
             Price from: ${minPrice}
           </Card.Text>
           <Row xs={2} className="justify-content-center">
-            <Button className={styles.cardBtn} href={`/products/${_id}`}>Details</Button>
+            <Link to={`/products/${_id}`}><Button className={styles.cardBtn} >Details</Button></Link>
           </Row>
         </Card.Body>
       </Card>

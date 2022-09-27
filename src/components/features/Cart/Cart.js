@@ -1,4 +1,4 @@
-import { Button, Container, Form, InputGroup, Stack } from 'react-bootstrap';
+import { Button, Container, Col, InputGroup, Row, Stack } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faMinus } from '@fortawesome/free-solid-svg-icons';
@@ -6,31 +6,40 @@ import { getCart, loadCart } from '../../../redux/cartRedux';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import CartItem from '../CartItem/CartItem';
+import shortid from 'shortid';
+import { Link } from 'react-router-dom';
+import styles from './Cart.module.scss';
 
 
 const Cart = () => {
   const cartProducts = useSelector(state => getCart(state));
   console.log(cartProducts);
 
-  // const [amount, setAmount] = useState(1);
-  // const updateAmount = ( value ) => {
-  //   let newAmount = amount;
-  //   if(value === '+') {
-  //     newAmount = amount + 1;
-  //   } else if(value === '-') {
-  //     newAmount = amount - 1;
-  //   }
-  //     setAmount(newAmount);
-  //     // setCartProduct({...cartProduct, quantity: newAmount});
-  // };
- return(
-  <Container>
+  let sum = 0;
+
+    for(let item of cartProducts){
+      const fullPrice = (item.basePrice + item.optionPrice) * item.quantity;
+      sum += fullPrice;
+    }
+  
+
+  if(cartProducts.length === 0) return <Container><h1>Your cart is empty!</h1></Container>
+  else return(
+  <Container className="my-4">
     <h1>Cart</h1>
-    <Stack>
+    <Stack className="py-3">
       {cartProducts.map(product =>
-        <CartItem key={product.cartId} product={product}/>
+        <CartItem key={shortid()} product={product}/>
       )}
-      </Stack>
+    </Stack>
+    <Row className="text-end">
+      <Col>
+      <h4>Sum: ${sum}</h4>        
+        <Link to="/checkout">
+          <Button variant="secondary" className={styles.btn}>Go to checkout</Button>
+        </Link>
+      </Col>
+    </Row>
   </Container>
   )
   

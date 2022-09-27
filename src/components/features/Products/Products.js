@@ -17,7 +17,7 @@ const Products = () => {
   else if(request.error) return <Alert color="warning">{request.error}</Alert>;
   else if(!request.success || !products.length) return <Alert color="info">No products</Alert>;
   else if(request.success) return (
-    <Row className="justify-content-between g-4" xs={1} sm={2} md={3} lg={4}>
+    <Row className="justify-content-between g-4 py-3" xs={1} sm={2} md={3} lg={4}>
       {products.map(product =>  <ProductCard key={product._id} product={product}/>)}
     </Row>
   )

@@ -22,16 +22,17 @@ const ProductPage = () => {
     dispatch(loadProductsRequest());
   }, [dispatch]);
 
+  const [active, setActive] = useState(false);
   const [fullPrice, setFullPrice] = useState('');
   const [amount, setAmount] = useState(1);
   const [cartProduct, setCartProduct] = useState({
     name: '',
     quantity: amount,
-    id: id,
+    _id: id,
     basePrice: '',
     optionPrice: '',
     optionName: '',
-    cartId: shortid()
+    userComment: ''
   });
 
   const updateAmount = ( value ) => {
@@ -45,7 +46,7 @@ const ProductPage = () => {
       setCartProduct({...cartProduct, quantity: newAmount});
   };
   const updatePrice = ({target}) => {
-    setCartProduct({ ...cartProduct, basePrice: product.minPrice, optionPrice: target.value, optionName: target.selectedOptions[0].text });
+    setCartProduct({ ...cartProduct, basePrice: product.minPrice, optionPrice: parseInt(target.value), optionName: target.selectedOptions[0].text });
     setFullPrice(parseInt(product.minPrice) + parseInt(target.value));
   };
 
@@ -60,7 +61,10 @@ const ProductPage = () => {
 
   const addToCart = (e) => {
     e.preventDefault();
-
+    setActive(true);
+    setTimeout(() => {
+        setActive(false);
+      }, 1000);
     const inCart = cartProducts.find(item => item._id === cartProduct._id && item.optionName === cartProduct.optionName);
     
     if(inCart){
@@ -70,22 +74,22 @@ const ProductPage = () => {
       setCartProduct({
         name: '',
         quantity: amount,
-        id: id,
+        _id: id,
         basePrice: '',
         optionPrice: '',
         optionName: '',
-        cartId: shortid()
+        userComment: ''
       });
     } else {
       dispatch(addCartProduct(cartProduct));
       setCartProduct({
         name: '',
         quantity: amount,
-        id: id,
+        _id: id,
         basePrice: '',
         optionPrice: '',
         optionName: '',
-        cartId: shortid()
+        userComment: ''
       });
     }
   }
@@ -95,7 +99,7 @@ const ProductPage = () => {
   else if(!request.success || !product) return <Alert color="info">No product</Alert>;
   else if(request.success)   
   return (
-    <Container>
+    <Container className="my-4">
       <Row className="justify-content-around" >
         <Col sm={6} xs={10} >
           <h1>{product.name}</h1>
@@ -128,7 +132,8 @@ const ProductPage = () => {
           <h5>Price: ${fullPrice*amount || product.minPrice*amount}</h5>
           <Row className="justify-content-center">
               <Col xs={12}>
-                <Button className={styles.cartBtn} onClick={addToCart} variant="secondary">Add to cart</Button>
+                {active && <Button className={styles.successBtn} variant="success">Added!</Button>}
+                {!active && <Button className={styles.cartBtn} onClick={addToCart} variant="secondary">Add to cart</Button>}
               </Col>
           </Row>
         </Col>

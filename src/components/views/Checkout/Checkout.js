@@ -1,13 +1,12 @@
 import { Container } from 'react-bootstrap';
 import Products from '../../features/Products/Products';
 
-const Home = () => {
+const Checkout = () => {
   return(
   <Container className="my-4">
-    <h1>Home</h1>
-    <Products />
+    <h1>Checkout</h1>
   </Container>
   )
 };
 
-export default Home;
+export default Checkout;
