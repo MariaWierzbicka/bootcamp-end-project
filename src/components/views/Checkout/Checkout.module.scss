@@ -1,0 +1,33 @@
+@import '../../../styles/settings.scss';
+
+.checkoutProduct{
+  border: solid 1px $color-lighter;
+  padding: 10px;
+}
+.input {
+  background-color: $color-dark;
+  color: $color-light;
+  &:focus {
+    background-color: $color-dark;
+    color: $color-light;
+  }
+}
+.pageTitle {
+  color: $color-medium;
+}
+.pageSubtitle {
+  color: $color-lighter;
+  margin: 0;
+}
+.formGroup {
+  max-width: fit-content;
+}
+.btnSubmit {
+  width: 60%;
+  margin-top: 20px;
+  background-color: $color-medium;
+  border-color: $color-medium;
+  &:hover{
+    transition: all 0.5s;
+  }
+}
