@@ -31,3 +31,9 @@
     transition: all 0.5s;
   }
 }
+.success{
+  background-color: $color-success;
+  border-color: $color-success;
+  color: $color-light;
+  font-size: large;
+}

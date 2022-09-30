@@ -1,12 +1,16 @@
-import { Container, Col, Form, Row, Stack, Button } from 'react-bootstrap';
+import { Container, Col, Form, Row, Stack, Button, Alert, Spinner} from 'react-bootstrap';
 import { getCart } from '../../../redux/cartRedux';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from './Checkout.module.scss';
 import {clsx} from 'clsx';
 import { useState } from 'react';
+import { sendOrderRequest, getRequests } from '../../../redux/ordersRedux';
+
 
 const Checkout = () => {
   const cartProducts = useSelector(state => getCart(state));
+  const dispatch = useDispatch();
+  const requests = useSelector(getRequests);
 
   let sum = 0;
 
@@ -15,26 +19,39 @@ const Checkout = () => {
     sum += fullPrice;
   }
 
+  const [isError, setIsError] = useState(false);
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
 
-  const handleSubmit = e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newOrder = { 
       name: name, 
       email: email, 
       phone: phone, 
       address: address,
-      products: [cartProducts],
+      products: cartProducts,
       total: sum
     };
-    console.log(newOrder);
+
+    if(newOrder.name && newOrder.email && newOrder.address && newOrder.phone && newOrder.products) {
+      dispatch(sendOrderRequest(newOrder));
+      console.log(newOrder)
+
+      setIsError(false);
+    } else {
+      setIsError(true);
+    }
   };
 
    return(
   <Container className="my-4">
+    { (requests['SEND_ORDER'] && requests['SEND_ORDER'].error && !isError) && <Alert color="danger">There's been a problem when submitting your order</Alert> }
+    { (requests['SEND_ORDER'] && requests['SEND_ORDER'].success && !isError) && <Alert className={styles.success}>Your order has been sent!</Alert> }
+    { (requests['SEND_ORDER'] && requests['SEND_ORDER'].pending) && <Spinner className="mb-5" color="primary" value={75} /> }
     <h1 className={styles.pageTitle}>Checkout</h1>
     <Row className="justify-content-around">
       <Col xs={10} sm={5}>

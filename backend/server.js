@@ -1,11 +1,13 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const app = express();
 const mongoose = require('mongoose');
 
 
 const productsRoutes = require('./routes/products.routes');
+const ordersRoutes = require('./routes/orders.routes');
+
+const app = express();
 
 app.use(cors());
 app.use(express.json());
@@ -15,7 +17,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '/public')));
 
 app.use('/api', productsRoutes);
-
+app.use('/api', ordersRoutes);
 
 app.use((req, res) => {
   res.status(404).send({ message: 'Not found...' });
