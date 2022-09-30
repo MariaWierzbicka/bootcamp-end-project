@@ -1,10 +1,6 @@
-import { Button, Container, Col, InputGroup, Row, Stack } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { faMinus } from '@fortawesome/free-solid-svg-icons';
-import { getCart, loadCart } from '../../../redux/cartRedux';
-import { useSelector, useDispatch } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { Button, Container, Col, Row, Stack } from 'react-bootstrap';
+import { getCart } from '../../../redux/cartRedux';
+import { useSelector } from 'react-redux';
 import CartItem from '../CartItem/CartItem';
 import shortid from 'shortid';
 import { Link } from 'react-router-dom';

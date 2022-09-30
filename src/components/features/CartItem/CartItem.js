@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Col,Container, Form, FormControl, InputGroup, Row } from 'react-bootstrap';
+import { Button, ButtonGroup, Col,Container, Form, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faMinus } from '@fortawesome/free-solid-svg-icons';
@@ -48,33 +48,37 @@ const CartItem = ({product}) => {
   return (
     <Container className={styles.cartContainer}>
       <Row className="justify-content-evenly align-items-center">
-        <Col xs={12} sm={5} direction="row" className="pt-3">
+        <Col xs={12} sm={4} direction="row" className="pt-3">
           <h3>{product.name}</h3>
           <p>Variant: {product.optionName}</p>
           {cartProduct.userComment && <p>Your comment: {cartProduct.userComment}</p>}
         </Col>
-        <Col xs={8} sm={3} className="text-center mb-3" >
-          <Button variant="outline" className={styles.removeBtn} onClick={() => setActive(true)}>Add comment</Button>
+        <Col xs={5} sm={2} className="text-center mb-3" >
+          <Button variant="outline" size="sm" className={styles.removeBtn} onClick={() => setActive(true)}>Add comment</Button>
         </Col>
-        <Col xs={6} sm={3}  className="justify-content-center mb-3">
+        <Col xs={5} sm={2}  className="justify-content-center mb-3">
           <ButtonGroup>
-            <Button variant="outline-secondary" onClick={() => (amount > 1 ? updateAmount('-') : null)}>
+            <Button variant="outline-secondary" size="sm" onClick={() => (amount > 1 ? updateAmount('-') : null)}>
               <FontAwesomeIcon icon={faMinus}  />
-            </Button>
+            </Button> 
             <Form.Control
               readOnly
               value={amount} 
               className={styles.amtInput}
             />
-            <Button variant="outline-secondary" align="end" onClick={() => updateAmount('+')}>
+            <Button variant="outline-secondary" size="sm" align="end" onClick={() => updateAmount('+')}>
               <FontAwesomeIcon icon={faPlus} />
             </Button>
           </ButtonGroup>
         </Col>
-        <Col xs={3} sm={1} className="text-center mb-3" >
+        <Col xs={2} sm={1} className="text-center mb-3" >
           <Button variant="outline" className={styles.removeBtn} onClick={handleRemove}>
             <FontAwesomeIcon icon={faTrashCan} />
           </Button>
+        </Col>
+        <Col className="text-end mb-3" sm={1} xs={12}>
+          <h5>${(cartProduct.basePrice + cartProduct.optionPrice)*cartProduct.quantity}</h5>
+        
         </Col>
       </Row>
       {active && <Row>

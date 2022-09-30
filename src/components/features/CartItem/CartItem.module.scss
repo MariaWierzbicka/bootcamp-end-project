@@ -18,4 +18,7 @@
 
 .input {
   background-color: $color-dark;
+  &:focus {
+    background-color: $color-dark;
+  }
 }

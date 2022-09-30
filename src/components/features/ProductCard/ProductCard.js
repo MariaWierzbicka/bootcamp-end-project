@@ -14,7 +14,7 @@ const ProductCard = ({product}) => {
             Price from: ${minPrice}
           </Card.Text>
           <Row xs={2} className="justify-content-center">
-            <Link to={`/products/${_id}`}><Button className={styles.cardBtn} >Details</Button></Link>
+            <Link to={`/products/${_id}`} className={styles.link}><Button variant="dark" className={styles.cardBtn} >Details</Button></Link>
           </Row>
         </Card.Body>
       </Card>
