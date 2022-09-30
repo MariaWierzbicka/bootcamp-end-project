@@ -1,0 +1,130 @@
+[{
+  "_id": {
+    "$oid": "631dcaadc2c69029edcccef2"
+  },
+  "name": "Table",
+  "photo": "/img/products/table.jpg",
+  "minPrice": 100,
+  "additionalPhotos": [
+    "/img/products/table2.jpg",
+    "/img/products/table3.jpg"
+  ],
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel lorem feugiat, congue dui in, elementum orci. Sed vitae augue lacinia, consectetur massa at, pharetra sapien. Proin sed molestie dolor.",
+  "options": [
+    {
+      "name": "Pine",
+      "addedPrice": 0
+    },
+    {
+      "name": "Oak",
+      "addedPrice": 100
+    },
+    {
+      "name": "Walnut",
+      "addedPrice": 150
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "6332ec9d561d9eb84651b245"
+  },
+  "name": "Bed",
+  "photo": "/img/products/bed.jpg",
+  "minPrice": 400,
+  "additionalPhotos": [
+    "/img/products/bed2.jpg",
+    "/img/products/bed3.jpg"
+  ],
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel lorem feugiat, congue dui in, elementum orci. Sed vitae augue lacinia, consectetur massa at, pharetra sapien. Proin sed molestie dolor.",
+  "options": [
+    {
+      "name": "Pine",
+      "addedPrice": 0
+    },
+    {
+      "name": "Oak",
+      "addedPrice": 200
+    },
+    {
+      "name": "Walnut",
+      "addedPrice": 280
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "6332ecc0561d9eb84651b246"
+  },
+  "name": "Nightstand",
+  "photo": "/img/products/bedside-table.jpg",
+  "minPrice": 50,
+  "additionalPhotos": [
+    "/img/products/bedside-table2.jpg",
+    "/img/products/bedside-table3.jpg",
+    "/img/products/bedside-table4.jpg"
+  ],
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel lorem feugiat, congue dui in, elementum orci. Sed vitae augue lacinia, consectetur massa at, pharetra sapien. Proin sed molestie dolor.",
+  "options": [
+    {
+      "name": "Pine",
+      "addedPrice": 0
+    },
+    {
+      "name": "Oak",
+      "addedPrice": 30
+    },
+    {
+      "name": "Walnut",
+      "addedPrice": 50
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "6332ece2561d9eb84651b247"
+  },
+  "name": "Shelve",
+  "photo": "/img/products/shelves.jpg",
+  "minPrice": 30,
+  "additionalPhotos": [
+    "/img/products/shelves2.jpg"
+  ],
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel lorem feugiat, congue dui in, elementum orci. Sed vitae augue lacinia, consectetur massa at, pharetra sapien. Proin sed molestie dolor.",
+  "options": [
+    {
+      "name": "Pine",
+      "addedPrice": 0
+    },
+    {
+      "name": "Oak",
+      "addedPrice": 15
+    },
+    {
+      "name": "Walnut",
+      "addedPrice": 30
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "6332ecf4561d9eb84651b248"
+  },
+  "name": "Cabinet",
+  "photo": "/img/products/cabinet.jpg",
+  "minPrice": 150,
+  "additionalPhotos": [
+    "\\img\\products\\cabinet2.jpg"
+  ],
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel lorem feugiat, congue dui in, elementum orci. Sed vitae augue lacinia, consectetur massa at, pharetra sapien. Proin sed molestie dolor.",
+  "options": [
+    {
+      "name": "Pine",
+      "addedPrice": 0
+    },
+    {
+      "name": "Oak",
+      "addedPrice": 40
+    },
+    {
+      "name": "Walnut",
+      "addedPrice": 80
+    }
+  ]
+}]
