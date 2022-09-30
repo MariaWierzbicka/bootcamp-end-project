@@ -18,7 +18,7 @@ const Checkout = () => {
     const fullPrice = (item.basePrice + item.optionPrice) * item.quantity;
     sum += fullPrice;
   }
-
+  const [success, setSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
 
   const [name, setName] = useState('');
@@ -42,6 +42,8 @@ const Checkout = () => {
       console.log(newOrder)
 
       setIsError(false);
+      window.scrollTo(0,0);
+      setSuccess(true);
     } else {
       setIsError(true);
     }
@@ -52,8 +54,9 @@ const Checkout = () => {
     { (requests['SEND_ORDER'] && requests['SEND_ORDER'].error && !isError) && <Alert color="danger">There's been a problem when submitting your order</Alert> }
     { (requests['SEND_ORDER'] && requests['SEND_ORDER'].success && !isError) && <Alert className={styles.success}>Your order has been sent!</Alert> }
     { (requests['SEND_ORDER'] && requests['SEND_ORDER'].pending) && <Spinner className="mb-5" color="primary" value={75} /> }
-    <h1 className={styles.pageTitle}>Checkout</h1>
+    {!success &&
     <Row className="justify-content-around">
+      <h1 className={styles.pageTitle}>Checkout</h1> 
       <Col xs={10} sm={5}>
         <h4 className={styles.pageSubtitle}>Your order summary:</h4>
         <Stack className="py-3 gap-3">
@@ -106,7 +109,7 @@ const Checkout = () => {
           <Button variant="dark btn-lg" className={styles.btnSubmit} onClick={handleSubmit} type="submit">Order</Button>      
         </Form>
       </Col>
-    </Row>
+    </Row>}
   </Container>
   )
 };
